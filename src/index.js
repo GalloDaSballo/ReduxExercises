@@ -1,15 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+//Create a new component
+//That shows some html
 
-import App from './components/app';
-import reducers from './reducers';
+//Const = ES6 similar to var but can't be changed -> a constant
+const App = () => {
+  //This is JSX Babel will convert this to some sort of JS
+  return <div>Hi!</div>;
+  /*
+   * return React.createElement(
+   * "div",
+   * null,
+   * "Hi!"
+   * );
+   */
+}
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.querySelector('.container'));
+//Automatically inserted in the dom via js
+ReactDOM.render(<App />, document.querySelector('.container'));
+//Render the app component inside the .container
+
+//LAST NOTE: always place one class/component per file.
