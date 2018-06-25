@@ -1,5 +1,5 @@
 /**
- * Exporting data, status and components
+ * Example of input tag that reacts to change
  */
 
 import React, { Component } from 'react'; //Required for all compoennts that use JSX
@@ -13,7 +13,7 @@ class SearchBar extends Component{ //By calling component we don't need to write
     return (
       <input
         //Just like old school js
-        onChange={this.onInputChange}
+        onChange={this.onInputChange} //onChange={(event) => { console.log(event.target.value) }} 
         placeholder="input"/>
     )
   }// The method call when ReactDOM.render is called
@@ -22,7 +22,7 @@ class SearchBar extends Component{ //By calling component we don't need to write
   onInputChange(event) { //event just like any other js event
     console.log("onInputChange")
     console.log(this)
-     console.log(event.target.value)
+    console.log(event.target.value)
   }
 }
 
