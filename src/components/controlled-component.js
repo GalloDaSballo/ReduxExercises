@@ -18,24 +18,25 @@ class SearchBar extends Component{ //By calling component we don't need to write
   }
 
   render(){
-
     return (
-      <div className="search-bar">
+      <div>
         <input
           //Just like old school js
           // onChange={this.onInputChange}
-          onChange = {event => this.onInputChange(event.target.value)}
+          onChange = {event => {this.setState({term : event.target.value}); console.log(this)}}
           //Note that this is not the input element, it is the SearchBar class
           value={this.state.term}
           placeholder="input"/>
+        Value of the input: {this.state.term}
       </div>
     )
   }// The method call when ReactDOM.render is called
 
+  //on NameOfElement TypeOfEvent
+  onInputChange(event) { //event just like any other js event
+    let value = event.target.value
 
-  onInputChange(term) {
-    this.setState({ term });
-    this.props.onSearchTermChange(term);
+    this.setState({term : value }) //This doesn't work.
   }
 }
 

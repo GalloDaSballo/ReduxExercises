@@ -4,11 +4,8 @@
  * 2-Search Bar Inclusion
  * 3- Index.js APP will be responsible for fetching the data cause it contasins all smaller classes. i.e. broader scope
  * 4- Added VideoList
- * 5- Allows Selected Video -> ONVideoSelect which gets propagated to video_list and then to video_list_item
- * 6- Allow to search for video
+ * 5- Allows Selected Video
  */
-
-import _ from 'lodash';
 import React, { Component } from 'react'; //Required for all compoennts that use JSX
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
@@ -30,42 +27,25 @@ class App extends Component{
     super(props); //need to call the super constructor
 
     //Create the state using standard js syntax
-    this.state = {
-      videos : [],
-      selectedVideo : null
-    }; //Default object
+    this.state = { videos : [] }; //Default object
 
-    this.videoSearch('surfboards')
-
-
-
-  }
-  videoSearch(the_term){
     YTSearch(
-      {key: API_KEY, term: the_term},
+      {key: API_KEY, term: 'surfboards'},
       (video_results) => {
-        this.setState({
-          videos : video_results,
-          selectedVideo: video_results[0]
-        })
+        this.setState({videos : video_results })
         //his.setState({videos}) is equivalent if we change video_results to videos
       }
-    )
+    );
+
   }
 
-
   render(){
-    //Debounce will return a function that can only be called every 300ms
-    const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 300);
-    
     return (
       //It requires the closing "/" otherwise it doesn't compile
       <div>
-        <SearchBar onSearchTermChange={videoSearch}/>
-        <VideoDetail video={this.state.selectedVideo}/>
-        <VideoList
-          onVideoSelect={selectedVideo => this.setState({selectedVideo})}
-          videos={this.state.videos} />
+        <SearchBar />
+        <VideoDetail video={this.state.videos[0]}/>
+        <VideoList videos={this.state.videos} />
       </div>
     ) /*Passing props to pass videos data to VideoList*/
     //Parenthesis to make it prettier / less messy

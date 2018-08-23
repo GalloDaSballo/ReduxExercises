@@ -7,8 +7,6 @@
  * 5- Allows Selected Video -> ONVideoSelect which gets propagated to video_list and then to video_list_item
  * 6- Allow to search for video
  */
-
-import _ from 'lodash';
 import React, { Component } from 'react'; //Required for all compoennts that use JSX
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
@@ -35,14 +33,8 @@ class App extends Component{
       selectedVideo : null
     }; //Default object
 
-    this.videoSearch('surfboards')
-
-
-
-  }
-  videoSearch(the_term){
     YTSearch(
-      {key: API_KEY, term: the_term},
+      {key: API_KEY, term: 'surfboards'},
       (video_results) => {
         this.setState({
           videos : video_results,
@@ -50,18 +42,15 @@ class App extends Component{
         })
         //his.setState({videos}) is equivalent if we change video_results to videos
       }
-    )
+    );
+
   }
 
-
   render(){
-    //Debounce will return a function that can only be called every 300ms
-    const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 300);
-    
     return (
       //It requires the closing "/" otherwise it doesn't compile
       <div>
-        <SearchBar onSearchTermChange={videoSearch}/>
+        <SearchBar />
         <VideoDetail video={this.state.selectedVideo}/>
         <VideoList
           onVideoSelect={selectedVideo => this.setState({selectedVideo})}
