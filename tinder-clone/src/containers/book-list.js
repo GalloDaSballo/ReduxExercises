@@ -20,13 +20,14 @@ class BookList extends Component {
   render(){
     return(
       <ul className="list-group col-sm-4">
-
+        {this.renderList()}
       </ul>
     )
   }
 }
 
 //This connects Redux to the Component
+//IF the state changes our container will re-render automatically
 function mapStateToProps(state){
   //Whatever is returned from here will be shown as props of BookList
   return{
