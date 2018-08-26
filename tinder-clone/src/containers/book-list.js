@@ -1,9 +1,12 @@
 /**
  * Container, i.e. smart component that interacts with Redux state directly
  */
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 //Function that connects react to redux
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+
+import {selectBook} from  '../actions/index' //this is the actionCreator
+import {bindActionCreators} from 'redux' //this will make it so that the action flows to all reducers in redux
 
 
 class BookList extends Component {
@@ -12,7 +15,11 @@ class BookList extends Component {
     //Trhough the map function we display each book
     return this.props.books.map((book) => {
       return (
-        <li key={book.title} className="list-group-item">{book.title}</li>
+        <li
+          onClick={() => this.props.selectBook(book)}
+          key={book.title} className="list-group-item">
+            {book.title}
+        </li>
       )
     })
   }
@@ -35,5 +42,12 @@ function mapStateToProps(state){
   }
 }
 
+//Anything returned by this function will end up as props in the BookList containr
+function mapDispatchToProps(dispatch){
+  //When selectBook is called, result will be passed to all the reducers
+  return bindActionCreators({ selectBook : selectBook }, dispatch) //The second selectBook is the one we imported
+  //The dispatch function will "talk to all the reducers "
+}
+
 //Exports the Component with Smart data managed by mapStateToProps
-export default connect(mapStateToProps)(BookList)
+export default connect(mapStateToProps, mapDispatchToProps)(BookList)

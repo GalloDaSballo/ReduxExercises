@@ -3,9 +3,9 @@
  */
 export default function() {
   return [
-    {title: "Gino"},
-    {title: "Bino"},
-    {title: "Pino"},
-    {title: "Fino"}
+    {title: "Gino", pages: 92},
+    {title: "Bino", pages: 567},
+    {title: "Pino", pages: 3222},
+    {title: "Fino", pages: 123}
   ]
 }
