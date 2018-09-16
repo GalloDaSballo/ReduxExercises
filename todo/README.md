@@ -1,5 +1,5 @@
-#Todo list
+# Todo list
 
 Just a simple todo List
 
-Can add items (will allow to delete in the future)
+Can add items and delete them
