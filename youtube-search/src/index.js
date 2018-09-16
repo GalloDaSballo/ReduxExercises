@@ -34,12 +34,9 @@ class App extends Component{
       videos : [],
       selectedVideo : null
     }; //Default object
-
     this.videoSearch('surfboards')
-
-
-
   }
+  
   videoSearch(the_term){
     YTSearch(
       {key: API_KEY, term: the_term},
@@ -57,7 +54,7 @@ class App extends Component{
   render(){
     //Debounce will return a function that can only be called every 300ms
     const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 300);
-    
+
     return (
       //It requires the closing "/" otherwise it doesn't compile
       <div>
